@@ -17,9 +17,9 @@ int main(int argc, char* argv[]) {
      arg1.param = 1;
      arg2.param = 0;
      pthread_create(&thread1, NULL, factorize, &arg1);
-     pthread_create(&thread2, NULL, factorize, &arg2);
+//     pthread_create(&thread2, NULL, factorize, &arg2);
      pthread_join(thread1, (void**) &ret1);
-     pthread_join(thread2, (void**) &ret2);
+ //    pthread_join(thread2, (void**) &ret2);
      if ((ret1 != 0 && strcmp(ret1, "Prime") == 0) && (ret2 != 0 && strcmp(ret2, "Prime") == 0)) {
            printf(" %s is a prime number. \n", num);
      } else {

@@ -21,8 +21,8 @@ void* factorize(void* arg1) {
 	unsigned int ctr = 0;
 	unsigned int l = strlen(num);
 	int state1_cnt = 0, state2_cnt = 0;
+	char pp = 0, ee = 0;
 	while (1) {
-		char pp = 0, ee = 0;
 		fscanf(fp, "%c", &pp);
 		if (state == param) {
 			ee = num[ctr];
@@ -45,6 +45,7 @@ void* factorize(void* arg1) {
 				} else if (state1_cnt < state2_cnt) {
 					result = result + "S";
 				}
+				state1_cnt = state2_cnt = 0;
 				int is_prime1 = 0, is_prime2 = 0;
 				char* factor1 = interpret(result, param, 1, num, is_prime1);
 				char* factor2 = interpret(result, param, 0, num, is_prime2);
@@ -67,7 +68,6 @@ void* factorize(void* arg1) {
 						break;
 					}
 				}
-				state1_cnt = state2_cnt = 0;
 			}
 		} 
 	}
