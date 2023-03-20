@@ -82,6 +82,7 @@ char* interpret(std::string result, int param, int p, char* num, int& is_prime) 
                }
           }
     }
+    ret[result.size()] = '\0';
     char* dec = _int_(ret);
     mpz_t dz;
     mpz_init(dz);
@@ -89,7 +90,7 @@ char* interpret(std::string result, int param, int p, char* num, int& is_prime) 
     mpz_t nz;
     mpz_init(nz);
     mpz_set_str(nz, num, 10);
-    if (mpz_cmp(nz, dz) >= 0) {
+    if (mpz_cmp(dz, nz) >= 0) {
          is_prime = 1;
     } else {
          is_prime = 0;
@@ -99,7 +100,7 @@ char* interpret(std::string result, int param, int p, char* num, int& is_prime) 
     return dec;
 }
 
-char* _modulo_(char* num, char* x) {
+char* _modulo_(char* num, char* x, int& d) {
    mpz_t nz;
    mpz_init(nz);
    mpz_set_str(nz, num, 10);
@@ -114,6 +115,9 @@ char* _modulo_(char* num, char* x) {
    } else {
 	   mpz_mod(remainder, nz, xz);
 	   r =  strdup(mpz_get_str(0, 10, remainder));
+   }
+   if (mpz_cmp_si(xz, 1) <= 0 || mpz_cmp(xz, nz) == 0) {
+        d = 1;
    }
    mpz_clear(nz);
    mpz_clear(xz);
