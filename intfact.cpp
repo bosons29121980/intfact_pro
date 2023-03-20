@@ -20,10 +20,7 @@ int main(int argc, char* argv[]) {
      pthread_create(&thread2, NULL, factorize, &arg2);
      pthread_join(thread1, (void**) &ret1);
      pthread_join(thread2, (void**) &ret2);
-     char* dec1 = _int_(ret1);
-     char* dec2 = _int_(ret2);
-     int is_prime = decision(dec1, dec2, num);
-     if (is_prime) {
+     if (strcmp(ret1, "Prime") == 0 && strcmp(ret2, "Prime") == 0) {
            printf(" %s is a prime number. \n", num);
      } else {
            printf("%s = %s X %s\n", num, dec1, dec2);
