@@ -9,7 +9,7 @@ void* factorize(void* arg1) {
     char* num = ((struct arg*) arg1)->num;
     int param = ((struct arg*) arg1)->param;
     std::string result = "";
-    char* ret = strdup((char*)result.c_str());
+    char* ret = 0;
     FILE* fp = fopen("./pi.dat","r");
     FILE* fe = fopen("./e.dat", "r");
     char* buf = (char*) calloc(3, sizeof(char));
@@ -44,6 +44,7 @@ void* factorize(void* arg1) {
                 } else if (state1_cnt < state2_cnt) {
                    result = result + "S";
                 }
+                state1_cnt = state2_cnt = 0;
                 if (ctr == 0) {
                      int is_prime1 = 0, is_prime2 = 0;
                      char* factor1 = interpret(result, param, 1, num, is_prime1);

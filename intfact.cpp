@@ -14,8 +14,8 @@ int main(int argc, char* argv[]) {
      struct arg arg2;
      arg1.num = num;
      arg2.num = num;
-     arg1.param = 0;
-     arg2.param = 1;
+     arg1.param = 1;
+     arg2.param = 0;
      pthread_create(&thread1, NULL, factorize, &arg1);
      pthread_create(&thread2, NULL, factorize, &arg2);
      pthread_join(thread1, (void**) &ret1);
@@ -23,7 +23,7 @@ int main(int argc, char* argv[]) {
      if (strcmp(ret1, "Prime") == 0 && strcmp(ret2, "Prime") == 0) {
            printf(" %s is a prime number. \n", num);
      } else {
-           printf("%s = %s X %s\n", num, dec1, dec2);
+           printf("%s = %s X %s\n", num, ret1, ret2);
      }
      return 0;
 }
