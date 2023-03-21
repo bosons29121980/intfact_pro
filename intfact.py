@@ -5,7 +5,6 @@ from factorize import factorize
 
 if __name__ == "__main__":
      num = str(sys.argv[1])
-     ctr = 0
      factors = dict([])
      t1 = threading.Thread(target=factorize, args=(num, 0, factors,))
      t2 = threading.Thread(target=factorize, args=(num, 1, factors,))
