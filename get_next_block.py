@@ -1,6 +1,4 @@
 #!/usr/local/bin/python3
-import sys
-
 def get_next_block(num, p, c, ctr):
     l = len(num)
     if p == 0:
