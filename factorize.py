@@ -30,7 +30,9 @@ def match(pp, zero_index):
     l = len(pp)
     nmatches = 0
     zero = get_zero(zero_index, l)
+    input(["zero index", zero_index])
     for z in list(zip(pp, zero)):
+          input(["z0", z[0], "z1", z[1], "nmatches", nmatches])
           if z[1] == '' or len(z[1]) == 0:
               print("Insufficient Precision Supplied")
               sys.exit(2)
@@ -74,7 +76,7 @@ def factorize(num, param, factors):
                 if c == d:
                     break
             snippet = match(pp, zero_index)
-            input(["snippet", snippet])
+            input(["zero index", zero_index, "snippet", snippet])
             factor = factor + snippet
             if len(factor) > 0 and factor != "":
                 dec = int(factor[::-1], 2)
