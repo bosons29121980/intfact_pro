@@ -34,7 +34,10 @@ def match(pp, zero_index):
               sys.exit(2)
           if z[0] == z[1]:
               nmatches = nmatches + 1 
-    return str(bin(nmatches)[2:])[::-1]
+    if nmatches > 0:
+        return str(bin(nmatches)[2:])[::-1]
+    else:
+        return ""
 
 def factorize(num, param, factors):
     l = len(num)
