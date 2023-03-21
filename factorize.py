@@ -42,6 +42,7 @@ def match(pp, zero_index):
 def factorize(num, param, factors):
     l = len(num)
     factor = ""
+    snippet = ""
     c = ""
     ctr = 0
     if param == 0:
@@ -55,8 +56,10 @@ def factorize(num, param, factors):
     position = 0
     while True:
         position, ctr, is_the_same = get_next_block(num, 1 - param, position, ctr)
+        input(["position", position, "ctr", ctr, "is the same", is_the_same]) 
         if is_the_same == 1:
             zero_index = zero_index + 1
+            factor = factor + snippet
             continue
         else:
             f.seek(position)
@@ -68,6 +71,7 @@ def factorize(num, param, factors):
                 if c == d:
                     break
             snippet = match(pp, zero_index)
+            input(["snippet", snippet])
             factor = factor + snippet
             dec = int(factor[::-1], 2)
             decision, is_possible = divides(num, dec) == True:
