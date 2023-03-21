@@ -6,8 +6,8 @@ def get_next_block(num, p, pos, ctr):
     else:
         f=open("./e.dat","r")
     f.read(2)
-    if position > 0:
-       f.seek(position)
+    if pos> 0:
+       f.seek(pos)
        c = str(f.read(l))
     while True:
         n = num[ctr]
