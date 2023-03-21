@@ -74,10 +74,11 @@ def factorize(num, param, factors):
             snippet = match(pp, zero_index)
             input(["snippet", snippet])
             factor = factor + snippet
-            dec = int(factor[::-1], 2)
-            decision, is_possible = divides(num, dec)
-            if decision == True:
-                  return dec, ctr
-            elif decision == False and is_possible == False:
-                  return 0, ctr
-            zero_index = zero_index + 1
+            if len(factor) > 0 and factor != "":
+                dec = int(factor[::-1], 2)
+                decision, is_possible = divides(num, dec)
+                if decision == True:
+                    return dec, ctr
+                elif decision == False and is_possible == False:
+                    return 0, ctr
+                zero_index = zero_index + 1
