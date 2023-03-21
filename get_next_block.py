@@ -19,7 +19,6 @@ def get_next_block(num, p, pos, ctr):
         while True:
             _pos_ = f.tell()
             c = str(f.read(l))
-            print(c)
             if c[ctr] == n:
                 ctr = (ctr + 1) % l
                 f.close()
