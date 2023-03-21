@@ -6,6 +6,8 @@ from factorize import factorize
 if __name__ == "__main__":
      num = str(sys.argv[1])
      factors = dict([])
+     factors[0] = 0
+     factors[1] = 0
      t1 = threading.Thread(target=factorize, args=(num, 0, factors,))
      t2 = threading.Thread(target=factorize, args=(num, 1, factors,))
      t1.start()
