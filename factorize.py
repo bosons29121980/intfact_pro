@@ -77,6 +77,6 @@ def factorize(num, param, factors):
             decision, is_possible = divides(num, dec)
             if decision == True:
                   return dec, ctr
-            elif decision == False and is_possible == True:
+            elif decision == False and is_possible == False:
                   return 0, ctr
             zero_index = zero_index + 1
