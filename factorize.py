@@ -60,7 +60,7 @@ def factorize(num, param, factors):
             pp = ""
             while True:
                 c = str(f.read(1))
-                pp = pp + "c"
+                pp = pp + c
                 d = str(g.read(1))
                 if c == d:
                     break
