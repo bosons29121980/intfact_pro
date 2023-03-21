@@ -19,7 +19,7 @@ def divides(num, d):
 def get_zero(zero_index, l):
     mp.prec = 2*l
     mp.dps = 2*l
-    zero = str(zetazero.imag(zero_index))
+    zero = str(zetazero(zero_index).imag)
     idx = zero.index(".")
     zero = zero[idx + 1:]
     return zero
