@@ -15,6 +15,8 @@ def divides(num, d):
     r = gmpy2.f_mod(nz, dz)
     if r == gmpy2.mpz('0'):
           return True, True
+    else:
+          return False, True
 
 def get_zero(zero_index, l):
     mp.prec = 2*l
