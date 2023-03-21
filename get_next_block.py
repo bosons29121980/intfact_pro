@@ -6,6 +6,7 @@ def get_next_block(num, p, pos, ctr):
     else:
         f=open("./e.dat","r")
     f.read(2)
+    c = ""
     if pos> 0:
        f.seek(pos)
        c = str(f.read(l))
