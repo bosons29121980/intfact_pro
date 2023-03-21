@@ -5,6 +5,7 @@ from mpmath import zetazero
 import sys
 import gmpy2
 
+BASE = 64
 def divides(num, d):
     nz = gmpy2.mpz(num)
     dz = gmpy2.mpz(d)
@@ -19,8 +20,9 @@ def divides(num, d):
           return False, True
 
 def get_zero(zero_index, l):
-    mp.prec = 2*l
-    mp.dps = 2*l
+    global BASE
+    mp.prec = BASE + 2*l
+    mp.dps = BASE + 2*l
     zero = str(zetazero(zero_index).imag)
     idx = zero.index(".")
     zero = zero[idx + 1:]
@@ -75,6 +77,7 @@ def factorize(num, param, factors):
                 d = str(g.read(1))
                 if c == d:
                     break
+            print(pp)
             snippet = match(pp, zero_index)
             input(["zero index", zero_index, "snippet", snippet])
             factor = factor + snippet
