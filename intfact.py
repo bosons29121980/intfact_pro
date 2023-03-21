@@ -11,6 +11,6 @@ if __name__ == "__main__":
      t1.start()
      t2.start()
      if factors[0]*factors[1] == num:
-         print(num + " = " + str(factor1) + " X " + str(factor2))
+         print(num + " = " + str(factor[0]) + " X " + str(factor[1]))
      else:
          print(num + " is a Prime Number.")
