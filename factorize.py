@@ -32,6 +32,7 @@ def match(pp, zero_index):
     l = len(pp)
     nmatches = 0
     zero = get_zero(zero_index, l)
+    print("pp", pp)
     input(["zero index", zero_index])
     for z in list(zip(pp, zero)):
           input(["z0", z[0], "z1", z[1], "nmatches", nmatches])
@@ -79,13 +80,15 @@ def factorize(num, param, factors):
                     break
             print(pp)
             snippet = match(pp, zero_index)
-            input(["zero index", zero_index, "snippet", snippet])
             factor = factor + snippet
+            input(["zero index", zero_index, "snippet", snippet, "factor", factor])
             if len(factor) > 0 and factor != "":
-                dec = int(factor[::-1], 2)
+                dec = int(factor, 2)
                 decision, is_possible = divides(num, dec)
                 if decision == True:
                     return dec, ctr
                 elif decision == False and is_possible == False:
-                    return 0, ctr
+                    print(dec, factor, "End of Synthesis")
+                    factor = ""
+                    #return 0, ctr
                 zero_index = zero_index + 1
