@@ -74,7 +74,7 @@ def factorize(num, param, factors):
             input(["snippet", snippet])
             factor = factor + snippet
             dec = int(factor[::-1], 2)
-            decision, is_possible = divides(num, dec) == True:
+            decision, is_possible = divides(num, dec)
             if decision == True:
                   return dec, ctr
             elif decision == False and is_possible == True:
