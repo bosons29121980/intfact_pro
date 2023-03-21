@@ -8,7 +8,7 @@ def get_next_block(num, p, c, ctr):
     f.read(2)
     while True:
         n = num[ctr]
-        while c[ctr] == n:
+        while len(c) > 0 and c[ctr] == n:
             ctr = (ctr + 1) % l
             f.close()
             return c, ctr
