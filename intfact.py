@@ -12,4 +12,7 @@ if __name__ == "__main__":
      t2.start()
      factor1 = t1.join()
      factor2 = t2.join()
-      
+     if factor1*factor2 == num:
+         print(num + " = " + str(factor1) + " X " + str(factor2))
+     else:
+         print(num + " is a Prime Number.")
