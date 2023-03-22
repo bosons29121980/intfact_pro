@@ -3,6 +3,7 @@ from get_next_block import get_next_block
 from mpmath import mp
 from mpmath import zetazero
 import sys
+import gmpy2
 
 def either_8_or_7(x):
     if x == '7' or x == '8':
@@ -17,6 +18,18 @@ def get_zero(zero_index, base):
     zero = zero[idx + 1:]
     return zero
 
+def divides(num, d):
+    nz = gmpy2.mpz(num)
+    dz = gmpy2.mpz(d)
+    if dz <= gmpy2.mpz("1"):
+         return False, True
+    if dz >= nz:
+         return False, False
+    r = gmpy2.f_mod(nz, dz)
+    if r == 0:
+         return True, True
+    return False, True
+    
 def factorize(num, param, factors, base):
     l = len(num)
     factor = ""
@@ -29,16 +42,11 @@ def factorize(num, param, factors, base):
     f.read(2)
     position = 0
     zero_index = 1
-    ptr = 0
     while True:
         position, ctr, is_the_same = get_next_block(num, 1 - param, position, ctr)
         if is_the_same == 1:
             zero_index = zero_index + 1
             factor = factor + snippet
-            if ctr == 0:
-               ptr = ptr + 1
-               if ptr == 2:
-                   break
             continue
         else:
             snippet = ""
@@ -57,17 +65,35 @@ def factorize(num, param, factors, base):
                 b87c = either_8_or_7(c)
                 b87d = either_8_or_7(d)
                 if  b87c == True and  b87d == True:
-                    if c == '8' and d == '7':
+                    if c == '8' and d == '7' and n87 > 0:
                         snippet = str(bin(n87)[2:]) 
-                        factor = factor + snippet 
+                        if param == 1:
+                            factor = factor + snippet[::-1]
+                        else:
+                            factor = factor + snippet
+                        if param == 0:
+                            decimal = int(factor[::-1], 2)
+                            decision, possible = divides(num, decimal)
+                            if decision == True: 
+                                 factors[param] = decimal
+                                 f.close()
+                                 return
+                            elif possible == False:
+                                 factors[param] = 0
+                                 f.close()
+                                 return
+                        elif param == 1:
+                           decimal = int(factor, 2)
+                           if decimal == int(num):
+                               factors[param] = decimal
+                               f.close()
+                               return
+                           elif decimal > int(num):
+                               factors[param] = 0
+                               f.close()
+                               return
+                        input(["param", param, "factor", factor, "n87", n87, "ctr", ctr])
                     break
                 elif b87c == True:
                     n87 = n87 + 1 
             zero_index = zero_index + 1
-        if ctr == 0:
-           ptr = ptr + 1
-           if ptr == 2:
-               break
-    f.close()
-    if len(factor) > 0:
-       factors[param] = int(factor, 2)
