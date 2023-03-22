@@ -70,5 +70,4 @@ def factorize(num, param, factors, base):
                break
     f.close()
     if len(factor) > 0:
-       dec = int(factor, 2)
-       return dec
+       factors[param] = int(factor, 2)
