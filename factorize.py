@@ -29,11 +29,16 @@ def factorize(num, param, factors, base):
     f.read(2)
     position = 0
     zero_index = 1
+    ptr = 0
     while True:
         position, ctr, is_the_same = get_next_block(num, 1 - param, position, ctr)
         if is_the_same == 1:
             zero_index = zero_index + 1
             factor = factor + snippet
+            if ctr == 0:
+               ptr = ptr + 1
+               if ptr == 2:
+                   break
             continue
         else:
             snippet = ""
@@ -59,6 +64,10 @@ def factorize(num, param, factors, base):
                 if b87c == True:
                     n87 = n87 + 1 
             zero_index = zero_index + 1
+        if ctr == 0:
+           ptr = ptr + 1
+           if ptr == 2:
+               break
     f.close()
     if len(factor) > 0:
        dec = int(factor, 2)
