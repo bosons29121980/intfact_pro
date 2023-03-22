@@ -20,6 +20,7 @@ def get_zero(zero_index, base):
 def factorize(num, param, factors, base):
     l = len(num)
     factor = ""
+    snippet = ""
     ctr = 0
     if param == 0:
         f = open("./e.dat", "r")
@@ -35,6 +36,7 @@ def factorize(num, param, factors, base):
             factor = factor + snippet
             continue
         else:
+            snippet = ""
             f.seek(position)
             zero = get_zero(zero_index, base)
             cnt = 0
@@ -51,7 +53,8 @@ def factorize(num, param, factors, base):
                 b87d = either_8_or_7(d)
                 if  b87c == True and  b87d == True:
                     if c == '8' and d == '7':
-                        factor = factor + str(bin(n87)[2:]) 
+                        snippet = str(bin(n87)[2:]) 
+                        factor = factor + snippet 
                     break
                 if b87c == True:
                     n87 = n87 + 1 
