@@ -30,7 +30,6 @@ def factorize(num, param, factors, base):
     zero_index = 1
     while True:
         position, ctr, is_the_same = get_next_block(num, 1 - param, position, ctr)
-        input(["position", position, "ctr", ctr, "is the same", is_the_same]) 
         if is_the_same == 1:
             zero_index = zero_index + 1
             factor = factor + snippet
