@@ -10,7 +10,6 @@ def get_next_block(num, p, pos, ctr):
     if pos> 0:
        f.seek(pos)
        c = str(f.read(l))
-       input(c)
     while True:
         n = num[ctr]
         while len(c) > 0 and c[ctr] == n:
@@ -20,9 +19,7 @@ def get_next_block(num, p, pos, ctr):
         while True:
             _pos_ = f.tell()
             c = str(f.read(l))
-            print(c)
             if c[ctr] == n:
                 ctr = (ctr + 1) % l
-                input(c)
                 f.close()
                 return _pos_, ctr, False
