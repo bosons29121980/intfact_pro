@@ -50,7 +50,7 @@ def factorize(num, param, factors, base):
                     sys.exit(2)
                 b87c = either_8_or_7(c)
                 b87d = either_8_or_7(d)
-                if  b87c == True and  == True:
+                if  b87c == True and  b87d == True:
                     if c == '8' and d == '7':
                         factor = factor + str(bin(n87)[2:]) 
                     break
