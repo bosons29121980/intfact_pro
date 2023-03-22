@@ -61,7 +61,7 @@ def factorize(num, param, factors, base):
                         snippet = str(bin(n87)[2:]) 
                         factor = factor + snippet 
                     break
-                if b87c == True:
+                elif b87c == True:
                     n87 = n87 + 1 
             zero_index = zero_index + 1
         if ctr == 0:
