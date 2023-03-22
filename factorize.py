@@ -45,7 +45,7 @@ def factorize(num, param, factors, base):
                 c = str(f.read(1))
                 d = zero[cnt]
                 cnt = cnt + 1
-                if cnt > z:
+                if cnt >= z:
                     print("Out of Precision Exception !!")
                     sys.exit(2)
                 b87c = either_8_or_7(c)
