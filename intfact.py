@@ -14,6 +14,7 @@ def get_zero(x):
     return zero, mantissa
 
 def get_next8(num, ctr):
+    l = len(num)
     n = ""
     for x in range(0, 8):
        n = n + num[ctr % l]
@@ -47,7 +48,10 @@ if __name__ == "__main__":
                     if z[2] in zero:
                          dr = dr + 1
                if nr == 4 and nr == dr:
-                   input([n, c, d])
+                   print(n)
+                   for zz in list(zip(c, d)):
+                        if (zz[0] == '7' or zz[0] == '8') and (zz[1] == '7' or zz[1] == '8'):
+                              input([zz[0], zz[1]])
            i = i + 1
     f.close()
     g.close()
