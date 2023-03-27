@@ -38,9 +38,9 @@ if __name__ == "__main__":
                          nr = nr + 1
                     if z[2] in zero:
                          dr = dr + 1
-               if nr == 2*dr:
+               if nr == 2*dr and nr > 0:
                    nlow = nlow + 1
-               if dr == 2*nr:
+               if dr == 2*nr and dr > 0:
                    nhigh = nhigh + 1
                if nr == dr and (nhigh > 0 or nlow > 0):
                    input(["high", nhigh, "low", nlow])
