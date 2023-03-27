@@ -15,7 +15,7 @@ def get_zero(x):
 
 def construct_next8(num, ctr):
     l = len(num)
-    old_ctr = ctr
+    old_ctr = (ctr + 1) % l
     for x in range(0, 8):
        ctr = (ctr + 1) % l
     return old_ctr, ctr
@@ -27,7 +27,7 @@ if __name__ == "__main__":
     f.read(2)
     g.read(2)
     i = 1
-    ctr = 0
+    ctr = -1
     while True:
            c = f.read(8)
            d = g.read(8)
