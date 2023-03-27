@@ -4,13 +4,21 @@ from mpmath import mp
 from mpmath import zetazero
 
 def get_zero(x):
-    mp.dps = 512
-    mp.prec = 512
+    mp.dps = 256
+    mp.prec = 256
     zero = str(zetazero(x).imag)
     idx = zero.index(".")
+    mantissa = zero[:idx]
     zero = zero[idx + 1:]
     zero = zero[:8]
-    return zero
+    return zero, mantissa
+
+def construct_next8(num, ctr):
+    l = len(num)
+    old_ctr = ctr
+    for x in range(0, 8):
+       ctr = (ctr + 1) % l
+    return old_ctr, ctr
 
 if __name__ == "__main__":
     num = str(sys.argv[1])
@@ -19,27 +27,27 @@ if __name__ == "__main__":
     f.read(2)
     g.read(2)
     i = 1
+    ctr = 0
     while True:
            c = f.read(8)
            d = g.read(8)
+           old_ctr, ctr = construct_next8(num, ctr)
            p = 0
            q = 0
            for x in num:
               p = p + c.count(x)
               q = q + d.count(x)
            if (p + q) == 8 and p == 4:
-               zero = get_zero(i)
+               zero, mantissa = get_zero(i)
                nr = 0
                dr = 0
                for z in list(zip(c, zero, d)):
-                    if z[0] in zero and z[0] != '0':
+                    if z[0] in zero:
                          nr = nr + 1
-                    if z[2] in zero and z[2] != '0':
+                    if z[2] in zero:
                          dr = dr + 1
-               if nr == dr:
-                   input([nr, dr])
-               else:
-                   print(nr, dr)
+               if nr == 4 and nr == dr:
+                   input([old_ctr, ctr])
            i = i + 1
     f.close()
     g.close()
