@@ -54,7 +54,7 @@ if __name__ == "__main__":
                               print([zz[0], zz[1]])
                               e1 = 1
                    if e1 == 1:
-                        input(n)
+                        input([ctr, l])
            i = i + 1
     f.close()
     g.close()
