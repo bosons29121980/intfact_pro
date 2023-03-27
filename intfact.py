@@ -34,9 +34,9 @@ if __name__ == "__main__":
                nr = 0
                dr = 0
                for z in list(zip(c, zero, d)):
-                    if z[0] in zero:
+                    if z[0] in zero and z[0] != '0':
                          nr = nr + 1
-                    if z[2] in zero:
+                    if z[2] in zero and z[2] != '0':
                          dr = dr + 1
                if nr == 2*dr and nr > 0:
                    nlow = nlow + 1
