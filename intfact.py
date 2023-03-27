@@ -42,7 +42,7 @@ if __name__ == "__main__":
                    nlow = nlow + 1
                if dr == 2*nr:
                    nhigh = nhigh + 1
-               if nr == dr:
+               if nr == dr and (nr > 0 or dr > 0):
                    input([nhigh, nlow])
                    nlow = 0
                    nhigh = 0
