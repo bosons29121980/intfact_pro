@@ -54,8 +54,8 @@ if __name__ == "__main__":
                         if (zz[0] == '7' or zz[0] == '8') and (zz[1] == '7' or zz[1] == '8'):
                               print([zz[0], zz[1]])
                               e1 = 1
-                   if e1 == 1:
-                        input([ctr, l])
+                   if e1 == 1 and ctr == 0:
+                        input("")
            i = i + 1
     f.close()
     g.close()
