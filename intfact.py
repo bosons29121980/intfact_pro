@@ -50,12 +50,13 @@ if __name__ == "__main__":
                          dr = dr + 1
                if nr == 4 and nr == dr:
                    e1 = 0
+                   vec = []
                    for zz in list(zip(c, d)):
                         if (zz[0] == '7' or zz[0] == '8') and (zz[1] == '7' or zz[1] == '8'):
-                              print([zz[0], zz[1]])
+                              vec.append([zz[0], zz[1]])
                               e1 = 1
                    if e1 == 1 and ctr == 0:
-                        input("")
+                        input(vec)
            i = i + 1
     f.close()
     g.close()
