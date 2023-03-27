@@ -23,6 +23,7 @@ def get_next8(num, ctr):
 
 if __name__ == "__main__":
     num = str(sys.argv[1])
+    l = len(num)
     f = open("./pi.dat","r")
     g = open("./e.dat","r")
     f.read(2)
