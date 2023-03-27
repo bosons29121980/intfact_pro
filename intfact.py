@@ -19,8 +19,6 @@ if __name__ == "__main__":
     f.read(2)
     g.read(2)
     i = 1
-    nhigh = 0
-    nlow = 0
     while True:
            c = f.read(8)
            d = g.read(8)
@@ -38,14 +36,10 @@ if __name__ == "__main__":
                          nr = nr + 1
                     if z[2] in zero and z[2] != '0':
                          dr = dr + 1
-               if nr == 2*dr and nr > 0:
-                   nlow = nlow + 1
-               if dr == 2*nr and dr > 0:
-                   nhigh = nhigh + 1
-               if nr == dr and (nhigh > 0 or nlow > 0):
-                   input(["high", nhigh, "low", nlow])
-                   nlow = 0
-                   nhigh = 0
+               if nr == dr:
+                   input([nr, dr])
+               else:
+                   print(nr, dr)
            i = i + 1
     f.close()
     g.close()
