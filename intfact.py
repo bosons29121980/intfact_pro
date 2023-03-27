@@ -49,9 +49,13 @@ if __name__ == "__main__":
                          dr = dr + 1
                if nr == 4 and nr == dr:
                    print(n)
+                   e1 = 0
                    for zz in list(zip(c, d)):
                         if (zz[0] == '7' or zz[0] == '8') and (zz[1] == '7' or zz[1] == '8'):
-                              input([zz[0], zz[1]])
+                              print([zz[0], zz[1]])
+                              e1 = 1
+                   if e1 == 1:
+                        input(n)
            i = i + 1
     f.close()
     g.close()
