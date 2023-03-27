@@ -13,6 +13,13 @@ def get_zero(x):
     zero = zero[:8]
     return zero, mantissa
 
+def get_next8(num, ctr):
+    n = ""
+    for x in range(0, 8):
+       n = n + num[ctr % l]
+       ctr = (ctr + 1) % l
+    return n, ctr
+
 if __name__ == "__main__":
     num = str(sys.argv[1])
     f = open("./pi.dat","r")
@@ -24,6 +31,7 @@ if __name__ == "__main__":
     while True:
            c = f.read(8)
            d = g.read(8)
+           n, ctr = get_next8(num, ctr)
            p = 0
            q = 0
            for x in num:
@@ -39,7 +47,7 @@ if __name__ == "__main__":
                     if z[2] in zero:
                          dr = dr + 1
                if nr == 4 and nr == dr:
-                   input([c, d])
+                   input([n, c, d])
            i = i + 1
     f.close()
     g.close()
