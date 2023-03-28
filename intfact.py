@@ -2,6 +2,7 @@
 import sys
 from mpmath import mp
 from mpmath import zetazero
+from zeros import zeros
 
 def get_zero(x):
     prec = 128
@@ -51,17 +52,21 @@ if __name__ == "__main__":
                          dr = dr + 1
                if nr == 4 and nr == dr:
                    e1 = 0
-                   vec = []
-                   for zz in list(zip(c, d)):
-                        if (zz[0] == '7' and zz[2] == '7') and (zz[0] == '8' and (zz[2] == '8' or zz[2] == '7')):
-                              e1 = 1
-                   if e1 == 1:
-                        print(c)
-                        print(zero)
-                        print(n)
-                        print(d)
-                        input(ctr)
-                        print("")
+                   e2 = 0
+                   for zz in list(zip(c, zero, n, d)):
+                        if (zz[0] == '7' and zz[3] == '7') and (zz[0] == '8' and (zz[3] == '8' or zz[3] == '7')):
+                              ss = zz[1] + zz[2]
+                              if int(ss) in zeros:
+                                  e1 = int(ss)
+                              e2 = 1 
+                   if e2 == 1:
+                       print(c)
+                       print(zero)
+                       print(n)
+                       print(d)
+                       if e1 > 0:
+                           input(e1)
+                       print("")
            i = i + 1
     f.close()
     g.close()
