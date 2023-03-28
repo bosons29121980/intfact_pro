@@ -53,7 +53,7 @@ if __name__ == "__main__":
                    e1 = 0
                    vec = []
                    for zz in list(zip(c, d)):
-                        if (zz[0] == '7' or zz[0] == '8') and (zz[1] == '7' or zz[1] == '8'):
+                        if (zz[0] == '7' and zz[2] == '7') and (zz[0] == '8' and (zz[2] == '8' or zz[2] == '7')):
                               e1 = 1
                    if e1 == 1:
                         print(c)
