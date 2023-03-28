@@ -4,8 +4,9 @@ from mpmath import mp
 from mpmath import zetazero
 
 def get_zero(x):
-    mp.dps = 256
-    mp.prec = 256
+    prec = 128
+    mp.dps = prec
+    mp.prec = prec
     zero = str(zetazero(x).imag)
     idx = zero.index(".")
     mantissa = zero[:idx]
