@@ -57,6 +57,8 @@ if __name__ == "__main__":
                               e1 = 1
                    if e1 == 1 and ctr == 0:
                         input(vec)
+                   elif e1 == 1:
+                        print(ctr)
            i = i + 1
     f.close()
     g.close()
