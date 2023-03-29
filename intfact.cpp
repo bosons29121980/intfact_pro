@@ -40,7 +40,7 @@ int divides(char* num, char* f) {
      } else if (mpz_cmp(fz, nz) >= 0) {
            mpz_clear(fz);
            mpz_clear(nz);
-           return 1;
+           return 2;
      }
      mpz_t rm;
      mpz_init(rm);
@@ -94,9 +94,11 @@ int main(int argc, char* argv[]) {
              char* dec = _int_(_factor_);
              int is_prime = divides(num, dec);
              if (!is_prime) {
-                  printf("%s is a factor of %s.", dec, num);
-             } else {
-                  printf("%s is a prime number.", num);
+                  printf("%s is a factor of %s.\n", dec, num);
+                  break;
+             } else if (is_prime == 2) {
+                  printf("%s is a prime number.\n", num);
+                  break;
              } 
              free(dec);
         } else {
