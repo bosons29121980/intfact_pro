@@ -1,9 +1,31 @@
+#include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <string>
 #include <gmp.h>
+#include "zeros.hpp"
+using namespace std;
 #define MAGIC 24
+#define NZEROS 2001051
+
+int binary_search(int x, int array[], int low, int high) {
+  // Repeat until the pointers low and high meet each other
+  while (low <= high) {
+    int mid = low + (high - low) / 2;
+
+    if (array[mid] == x)
+      return mid;
+
+    if (array[mid] < x)
+      low = mid + 1;
+
+    else
+      high = mid - 1;
+  }
+
+  return -1;
+}
 
 char* _int_(std::string d) {
     mpz_t prod;
@@ -26,7 +48,7 @@ char* _int_(std::string d) {
     return ret;
 }
 
-int divides(char* num, char* f) {
+int _divides_(char* num, char* f) {
      mpz_t fz;
      mpz_t nz;
      mpz_init(fz);
@@ -44,7 +66,7 @@ int divides(char* num, char* f) {
      }
      mpz_t rm;
      mpz_init(rm);
-     mpz_div(rm, nz, fz);
+     mpz_mod(rm, nz, fz);
      if (mpz_cmp_si(rm, 0) == 0) {
          mpz_clear(rm);
          mpz_clear(fz);
@@ -63,48 +85,46 @@ int main(int argc, char* argv[]) {
      FILE* fp = fopen("./pi.dat","r");
      FILE* fe = fopen("./e.dat","r");
      int ctr = 0;
-     int sum = (num[ctr] - '0') + (num[(ctr + 1) % l] - '0');
      char* buf = (char*) calloc(3, sizeof(char));
      fread(buf, 2, sizeof(char), fp);
      fread(buf, 2, sizeof(char), fe);
-     int sum2 = 0;
+     int sum = 0;
      int pos = 0;
+     long long int ptr = 0;
      std::string factor = "";
      while (1) {
-        unsigned long int pos1 = ftell(fp); 
-        unsigned long int pos2 = ftell(fe); 
         char pp = 0, ee = 0;
         fscanf(fp, "%c", &pp);
         fscanf(fe, "%c", &ee);
-        sum2 = (pp - '0') + (ee - '0');
-        fscanf(fp, "%c", &pp);
-        fscanf(fe, "%c", &ee);
-        sum2 = sum2 + (pp - '0') + (ee - '0');
-        int sum3 = sum + sum2;
-        if (sum3 == MAGIC) {
-             ctr += 2;
-             ctr %= l;
-             sum = (num[ctr] - '0') + (num[(ctr + 1) % l] - '0');
-             if (pos == 0) {
-                  factor = factor + "1";
-             } else {
-                  factor = factor + "0";
-             }
-             std::string _factor_ = factor;
-             char* dec = _int_(_factor_);
-             int is_prime = divides(num, dec);
-             if (!is_prime) {
-                  printf("%s is a factor of %s.\n", dec, num);
-                  break;
-             } else if (is_prime == 2) {
-                  printf("%s is a prime number.\n", num);
-                  break;
-             } 
-             free(dec);
-        } else {
-             fseek(fp, pos1 + 1, SEEK_SET);
-             fseek(fe, pos2 + 1, SEEK_SET);
+        int _ctr_ = ctr;
+        sum = (pp - '0') + (num[ctr] - '0') + (ee - '0');
+        unsigned int pos1_ = ftell(fp);
+        unsigned int pos2_ = ftell(fe);
+        unsigned int pos1 = ftell(fp);
+        unsigned int pos2 = ftell(fe);
+        while (sum < MAGIC) {
+              pos1 = ftell(fp);
+              pos2 = ftell(fe);
+              fscanf(fp, "%c", &pp);
+              fscanf(fe, "%c", &ee);
+              ctr = (ctr + 1) % l;
+              sum = sum + (pp - '0') + (num[ctr] - '0') + (ee - '0');
         }
+        if (sum == MAGIC) {
+            int is_zero = binary_search(ptr + 1, zeros, 0, NZEROS);
+            if (pos == 0) {
+                 cout << "fits" << "\t" << ptr + 1 << "\t" << is_zero << endl;
+            } else { 
+                 cout << "not fit" << "\t" << ptr + 1 << "\t" << is_zero << endl;
+            } 
+            ptr++;
+            system("a=1; read a");
+            ctr = (ctr + 1) % l;
+         } else {
+            ctr = _ctr_;
+	 }
+	fseek(fp, pos1_, SEEK_SET);
+	fseek(fe, pos2_, SEEK_SET);
         pos = (pos + 1) % 3;
      }
      fclose(fp);
