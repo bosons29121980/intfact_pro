@@ -50,17 +50,10 @@ if __name__ == "__main__":
                     if z[2] in zero:
                          dr = dr + 1
                if nr == 4 and nr == dr:
-                   e2 = 0
-                   for zz in list(zip(c, d)):
-                        if (zz[0] == '7' and zz[1] == '7') or (zz[0] == '8' and (zz[1] == '8' or zz[1] == '7')):
-                              e2 = 1 
-                   if e2 == 1:
-                       print(c)
-                       print(zero)
-                       print(n)
-                       print(d)
-                       input("")
-                       print("")
+                   for zz in list(zip(c, zero, n, d)):
+                        if (zz[0] == '7' and zz[3] == '7') or (zz[0] == '8' and (zz[3] == '8' or zz[3] == '7')):
+                              if zz[1] == zz[2]:
+                                  input([zz[0], zz[3]])
            i = i + 1
     f.close()
     g.close()
