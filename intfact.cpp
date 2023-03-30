@@ -4,28 +4,8 @@
 #include <string.h>
 #include <string>
 #include <gmp.h>
-#include "zeros.hpp"
 using namespace std;
 #define MAGIC 24
-#define NZEROS 2001051
-
-int binary_search(int x, int array[], int low, int high) {
-  // Repeat until the pointers low and high meet each other
-  while (low <= high) {
-    int mid = low + (high - low) / 2;
-
-    if (array[mid] == x)
-      return mid;
-
-    if (array[mid] < x)
-      low = mid + 1;
-
-    else
-      high = mid - 1;
-  }
-
-  return -1;
-}
 
 char* _int_(std::string d) {
     mpz_t prod;
@@ -90,7 +70,6 @@ int main(int argc, char* argv[]) {
      fread(buf, 2, sizeof(char), fe);
      int sum = 0;
      int pos = 0;
-     long long int ptr = 0;
      std::string factor = "";
      while (1) {
         char pp = 0, ee = 0;
@@ -111,21 +90,19 @@ int main(int argc, char* argv[]) {
               sum = sum + (pp - '0') + (num[ctr] - '0') + (ee - '0');
         }
         if (sum == MAGIC) {
-            int is_zero = binary_search(ptr + 1, zeros, 0, NZEROS);
-            if (pos == 0) {
-                 cout << "fits" << "\t" << ptr + 1 << "\t" << is_zero << endl;
+            if ((pos % 3) == 0) {
+                 cout << "fits" << "\t" << pos / 3 << endl;
             } else { 
-                 cout << "not fit" << "\t" << ptr + 1 << "\t" << is_zero << endl;
+                 cout << "not fit" << "\t" << endl;
             } 
-            ptr++;
             system("a=1; read a");
             ctr = (ctr + 1) % l;
          } else {
             ctr = _ctr_;
 	 }
+        pos++;
 	fseek(fp, pos1_, SEEK_SET);
 	fseek(fe, pos2_, SEEK_SET);
-        pos = (pos + 1) % 3;
      }
      fclose(fp);
      fclose(fe);
