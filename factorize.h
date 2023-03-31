@@ -20,6 +20,10 @@ void* factorize(void* arg) {
        fp = fopen("./e.dat", "r");
        fe = fopen("./pi.dat", "r");
     }
+    char* buf = (char*) calloc(3, sizeof(char));
+    fread(buf, 2, sizeof(char), fp);
+    fread(buf, 2, sizeof(char), fe);
+    free(buf);
     std::string factor = "";
     unsigned long long int ctr = 0;
     char* ret = 0;
@@ -36,6 +40,8 @@ void* factorize(void* arg) {
         char n2 = num[(ctr + 1) % l];
         fscanf(fe, "%c", &ee2);
         sum += (pp2 - '0') + (n2 - '0') + (ee2 - '0');
+        printf("sum\t%d\n", sum);
+        system("a=1;read a");
         if (sum == MAGIC) {
            if (ctr % PART == 0) {
                 factor = factor + "1";
