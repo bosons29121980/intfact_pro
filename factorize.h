@@ -5,6 +5,7 @@
 using namespace std;
 const int MAGIC = 24;
 const int START = 2;
+const int PART = 3;
 
 void* factorize(void* arg) {
 	struct func_arg* a = (struct func_arg*) arg;
@@ -57,12 +58,12 @@ void* factorize(void* arg) {
 			nOdd++;
 		}
 		sum += sum2; 
-		printf("sum\t%d\tpp %c\tn %c\t e %c factor %s\t last_even %d\t last_odd %d\n", sum, pp2 , n, ee2, (char*) factor.c_str(), last_even, last_odd);
+		printf("sum\t%d\tpp %c\tn %c\t e %c factor %s\t last_even %d\t last_odd %d\n", sum, pp2 , n2, ee2, (char*) factor.c_str(), last_even, last_odd);
 		system("a=1;read a");
 		if (sum == MAGIC) {
-			if (last_even == last_odd) {
+			if (abs(last_even - last_odd) % PART == 0) {
 				factor = factor + "1";
-				ctr += 2;
+				ctr++;
 				fseek(fe, START,  SEEK_SET);
 				fscanf(fp, "%c", &pp);
 				n = num[ctr % l];
@@ -74,9 +75,9 @@ void* factorize(void* arg) {
 				} else {
 					nOdd++;
 				}
-                                last_odd = nOdd;
-                                last_even = nEven;
-				printf("sum\t%d\tpp %c\tn %c\t e %c factor %s \tlast_odd %d\t last_even %d\n", sum, pp , n, ee, (char*) factor.c_str(), last_odd, last_even);
+				last_odd = nOdd;
+				last_even = nEven;
+				printf("sum\t%d\tpp %c\tn %c\t e %c factor %s \tlast_odd %d\t last_even %d\n", sum, pp, n, ee, (char*) factor.c_str(), last_odd, last_even);
 			} else {
 				factor = factor + "0";
 				last_odd = last_odd2;
