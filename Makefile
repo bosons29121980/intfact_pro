@@ -2,4 +2,4 @@ clean:
 	-rm factorize
 
 all:
-	-g++ -g -o factorize intfact.cpp -I./ -lgmp -lpthread
+	-g++ -o factorize intfact.cpp -I./ -lgmp -lpthread
