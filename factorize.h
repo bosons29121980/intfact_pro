@@ -5,7 +5,6 @@
 using namespace std;
 const int MAGIC = 24;
 const int START = 2;
-const int PART = 3;
 
 void* factorize(void* arg) {
 	struct func_arg* a = (struct func_arg*) arg;
@@ -41,8 +40,6 @@ void* factorize(void* arg) {
 	}
 	++ctr;
 	while (1) {
-		unsigned int pos1 = ftell(fp);
-		unsigned int pos2 = ftell(fe);
 		char pp2 = 0, ee2 = 0;
 		fscanf(fp, "%c", &pp2);
 		char n2 = num[ctr % l];
@@ -55,6 +52,7 @@ void* factorize(void* arg) {
 			if (nEven == nOdd) {
 				factor = factor + "1";
 				ctr += 2;
+                                fseek(fe, START,  SEEK_SET);
 				fscanf(fp, "%c", &pp);
 				n = num[ctr % l];
 				fscanf(fe, "%c", &ee);
