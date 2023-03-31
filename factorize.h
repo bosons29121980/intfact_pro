@@ -57,7 +57,7 @@ void* factorize(void* arg) {
 			nOdd++;
 		}
 		sum += sum2; 
-		printf("sum\t%d\tpp %c\tn %c\t e %c factor %s\n", sum, pp , n, ee, (char*) factor.c_str());
+		printf("sum\t%d\tpp %c\tn %c\t e %c factor %s\t last_even %d\t last_odd %d\n", sum, pp2 , n, ee2, (char*) factor.c_str(), last_even, last_odd);
 		system("a=1;read a");
 		if (sum == MAGIC) {
 			if (last_even == last_odd) {
@@ -68,13 +68,15 @@ void* factorize(void* arg) {
 				n = num[ctr % l];
 				fscanf(fe, "%c", &ee);
 				sum = (pp - '0') + (n - '0') + (ee - '0');
-				last_odd = last_even = nOdd = nEven = 0;
+				nOdd = nEven = 0;
 				if (sum % 2 == 0) {
 					nEven++;
 				} else {
 					nOdd++;
 				}
-				printf("sum\t%d\tpp %c\tn %c\t e %c odd %llu\t even %llu\n", sum, pp , n, ee, nOdd, nEven);
+                                last_odd = nOdd;
+                                last_even = nEven;
+				printf("sum\t%d\tpp %c\tn %c\t e %c factor %s \tlast_odd %d\t last_even %d\n", sum, pp , n, ee, (char*) factor.c_str(), last_odd, last_even);
 			} else {
 				factor = factor + "0";
 				last_odd = last_odd2;
