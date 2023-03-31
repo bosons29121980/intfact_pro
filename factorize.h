@@ -22,6 +22,7 @@ void* factorize(void* arg) {
     }
     std::string factor = "";
     unsigned long long int ctr = 0;
+    char* ret = 0;
     while (1) {
         char pp = 0, ee = 0;
         fscanf(fp, "%c", &pp);
@@ -45,10 +46,19 @@ void* factorize(void* arg) {
                 fseek(fp, pos1, SEEK_SET);
                 fseek(fe, pos2, SEEK_SET);
            }
+	   if (ctr % l == 0) {
+		   ret = _int_(factor);
+		   int is_prime = _divides_(num, ret);
+		   if (is_prime == 2) {
+			   ret = strdup("");
+			   break;
+		   } else if (is_prime == 0) {
+			   break;
+		   } 
+	   }
         }
         ctr++; 
     }
-    char* ret = strdup((char*) factor.c_str());
     fclose(fp);
     fclose(fe);
     return ret;
