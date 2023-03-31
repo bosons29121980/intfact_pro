@@ -5,7 +5,7 @@
 using namespace std;
 const int MAGIC = 24;
 const int START = 2;
-const int PART = 3;
+const int PART = 4;
 
 void* factorize(void* arg) {
 	struct func_arg* a = (struct func_arg*) arg;
@@ -69,7 +69,6 @@ void* factorize(void* arg) {
 				n = num[ctr % l];
 				fscanf(fe, "%c", &ee);
 				sum = (pp - '0') + (n - '0') + (ee - '0');
-				nOdd = nEven = 0;
 				if (sum % 2 == 0) {
 					nEven++;
 				} else {
