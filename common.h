@@ -25,6 +25,9 @@ char* _int_(std::string factor) {
         mpz_mul_ui(prod, prod, 2);
     }
     char* ret = strdup(mpz_get_str(0, 10, sum));
+    mpz_clear(sum);
+    mpz_clear(prod);
+    mpz_clear(term);
     return ret;
 }
 
