@@ -2,6 +2,7 @@
 #define __FACTORIZE__
 #include "common.h"
 #include "zeros.h"
+#include "zeros2.h"
 #include <string>
 #include <pthread.h>
 using namespace std;
@@ -46,8 +47,28 @@ void* factorize(void* arg) {
 		if (sum == MAGIC && sum2 == PART_MAGIC) {
 			if ((ctr + 1) % PART == 0) {
 				pthread_t x = pthread_self();
-				printf("pid %p\tzero %.8lf\tpp %c n %c ee %c\n", x, zeros[ctr-1], pp, n, ee);
-				printf("pid %p\tzero %.8lf\t pp2 %c n2 %c ee %c\n", x, zeros[ctr], pp2, n2, ee2);
+                                double frac1 = zeros[ctr-1] - ((long) zeros[ctr-1]);
+                                double frac2 = zeros[ctr] - ((long) zeros[ctr]);
+                                char* frac_string1 = (char*) calloc(10, sizeof(char));
+                                char* frac_string2 = (char*) calloc(10, sizeof(char));
+                                sprintf(frac_string1, "%.8lf", frac1);
+                                sprintf(frac_string2, "%.8lf", frac2);
+                                ++frac_string1;
+                                ++frac_string2;
+                                int nzeros = 0;
+                                for (int i = 0; i < 8; ++i) {
+                                     char ss[3];
+                                     ss[0] = frac_string1[i];
+                                     ss[1] = frac_string2[i];
+                                     ss[2] = '\0';
+                                     int ret = binarySearch(zeros2, atoi(ss), 0, 28);
+                                     if (ret > -1) {
+                                          nzeros = nzeros + 1;
+                                     }
+                                }
+				printf("pid %p\tpp %c n %c ee %c\n", x, pp, n, ee);
+				printf("pid %p\tpp2 %c n2 %c ee %c\n", x, pp2, n2, ee2);
+                                printf("pid %p nzeros %d\n", x, nzeros);
 				ctr++;
 				fseek(fe, START,  SEEK_SET);
 				fscanf(fp, "%c", &pp);

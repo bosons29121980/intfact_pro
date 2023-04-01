@@ -10,25 +10,21 @@ struct func_arg {
     int param;
 };
 
-char* _int_(std::string factor) {
-    mpz_t sum;
-    mpz_init(sum);
-    mpz_t prod;
-    mpz_init(prod);
-    mpz_set_si(sum, 0);
-    mpz_set_ui(prod, 1);
-    mpz_t term;
-    mpz_init(term);
-    for (int i = 0; i < factor.size(); ++i) {
-        mpz_mul_ui(term, prod, factor[i]-'0');
-        mpz_add(sum, sum, term);
-        mpz_mul_ui(prod, prod, 2);
-    }
-    char* ret = strdup(mpz_get_str(0, 10, sum));
-    mpz_clear(sum);
-    mpz_clear(prod);
-    mpz_clear(term);
-    return ret;
+int binarySearch(int array[], int x, int low, int high) {
+  // Repeat until the pointers low and high meet each other
+  while (low <= high) {
+    int mid = low + (high - low) / 2;
+
+    if (array[mid] == x)
+      return mid;
+
+    if (array[mid] < x)
+      low = mid + 1;
+
+    else
+      high = mid - 1;
+  }
+  return -1;
 }
 
 int _divides_(char* num, char* f) {
