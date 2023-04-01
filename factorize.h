@@ -5,14 +5,20 @@
 #include "zeros2.h"
 #include <string>
 #include <pthread.h>
+#include <stdlib.h>
+#include <unistd.h>
 using namespace std;
 const int MAGIC = 24;
 const int PART_MAGIC = 12;
 const int START = 2;
 const int PART = 8;
+const int MAGIC2 = 3;
+int zero_count[2];
 
 void* factorize(void* arg) {
 	struct func_arg* a = (struct func_arg*) arg;
+        pthread_mutex_t lock;
+        pthread_mutex_init(&lock, NULL);
 	char* num = a->num;
 	unsigned long long int l = strlen(num);
 	int param = a->param;
@@ -66,9 +72,18 @@ void* factorize(void* arg) {
                                           nzeros = nzeros + 1;
                                      }
                                 }
+                                pthread_mutex_lock(&lock);
+                                zero_count[param] = nzeros;
+                                pthread_mutex_unlock(&lock);
+                                while (zero_count[0] == -1 || zero_count[1] == -1) {
+                                    sleep(2);
+                                }
+                                if (zero_count[0] == zero_count[1] && zero_count[0] == MAGIC2) { 
 				printf("pid %p\tpp %c n %c ee %c\n", x, pp, n, ee);
 				printf("pid %p\tpp2 %c n2 %c ee %c\n", x, pp2, n2, ee2);
                                 printf("pid %p nzeros %d\n", x, nzeros);
+       }
+                                zero_count[0] = zero_count[1] = -1;
 				ctr++;
 				fseek(fe, START,  SEEK_SET);
 				fscanf(fp, "%c", &pp);
