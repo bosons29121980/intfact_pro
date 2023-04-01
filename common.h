@@ -5,6 +5,7 @@
 #include <string.h>
 #include <string>
 
+pthread_mutex_t lock;
 struct func_arg {
     char* num;
     int param;
