@@ -3,6 +3,9 @@
 #include "common.h"
 #include "zeros.h"
 #include <string>
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/syscall.h>
 using namespace std;
 const int MAGIC = 24;
 const int PART_MAGIC = 12;
@@ -44,14 +47,15 @@ void* factorize(void* arg) {
 		sum += sum2; 
 		if (sum == MAGIC && sum2 == PART_MAGIC) {
 			if ((ctr + 1) % PART == 0) {
-				printf("sum\t%d\tsum2 %d\tpp %c\tn %c\t e %c  ctr %llu zero %f\n", sum, sum2, pp2 , n2, ee2, ctr % l, zeros[ctr]);
+				pid_t x = syscall(SYS_gettid);
+				printf("pid %d\tsum %d\tpp %c\tn %c\t e %c  ctr %llu zero %f\n", x, sum, pp , n, ee, (ctr - 1) % l, zeros[ctr-1]);
+				printf("pid %d\tsum2 %d\tpp %c\tn %c\t e %c  ctr %llu zero %f\n", x, sum2, pp2 , n2, ee2, ctr % l, zeros[ctr]);
 				ctr++;
 				fseek(fe, START,  SEEK_SET);
 				fscanf(fp, "%c", &pp);
 				n = num[ctr % l];
 				fscanf(fe, "%c", &ee);
 				sum = (pp - '0') + (n - '0') + (ee - '0');
-				printf("sum\t%d\tpp %c\tn %c\t e %c \t ctr %llu zero %f\n", sum, pp, n, ee, ctr % l, zeros[ctr]);
 		                system("a=1;read a");
 			} else {
 				sum = sum2;
