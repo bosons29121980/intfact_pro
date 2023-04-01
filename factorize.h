@@ -42,9 +42,9 @@ void* factorize(void* arg) {
 		fscanf(fe, "%c", &ee2);
 		int sum2 = (pp2 - '0') + (n2 - '0') + (ee2 - '0'); 
 		sum += sum2; 
-		printf("sum\t%d\tpp %c\tn %c\t e %c  ctr %llu zero %f\n", sum, pp2 , n2, ee2, ctr % l, zeros[ctr]);
 		if (sum == MAGIC && sum2 == PART_MAGIC) {
 			if ((ctr + 1) % PART == 0) {
+				printf("sum\t%d\tsum2 %d\tpp %c\tn %c\t e %c  ctr %llu zero %f\n", sum, sum2, pp2 , n2, ee2, ctr % l, zeros[ctr]);
 				ctr++;
 				fseek(fe, START,  SEEK_SET);
 				fscanf(fp, "%c", &pp);
