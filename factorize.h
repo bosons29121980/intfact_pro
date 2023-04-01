@@ -46,8 +46,8 @@ void* factorize(void* arg) {
 		if (sum == MAGIC && sum2 == PART_MAGIC) {
 			if ((ctr + 1) % PART == 0) {
 				pthread_t x = pthread_self();
-				printf("pid %p\tzero %.8lf\n", x, zeros[ctr-1]);
-				printf("pid %p\tzero %.8lf\n", x, zeros[ctr]);
+				printf("pid %p\tzero %.8lf\tpp %c n %c ee %c\n", x, zeros[ctr-1], pp, n, ee);
+				printf("pid %p\tzero %.8lf\t pp2 %c n2 %c ee %c\n", x, zeros[ctr], pp2, n2, ee2);
 				ctr++;
 				fseek(fe, START,  SEEK_SET);
 				fscanf(fp, "%c", &pp);
@@ -60,6 +60,9 @@ void* factorize(void* arg) {
 			}
 		} else {
 			sum = sum2;
+                        n = n2;
+                        pp = pp2;
+                        ee = ee2;
 		}
 		ctr++; 
 	}
