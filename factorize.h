@@ -3,9 +3,7 @@
 #include "common.h"
 #include "zeros.h"
 #include <string>
-#include <sys/types.h>
-#include <unistd.h>
-#include <sys/syscall.h>
+#include <pthread.h>
 using namespace std;
 const int MAGIC = 24;
 const int PART_MAGIC = 12;
@@ -47,9 +45,9 @@ void* factorize(void* arg) {
 		sum += sum2; 
 		if (sum == MAGIC && sum2 == PART_MAGIC) {
 			if ((ctr + 1) % PART == 0) {
-				pid_t x = syscall(SYS_gettid);
-				printf("pid %d\tsum %d\tpp %c\tn %c\t e %c  ctr %llu zero %f\n", x, sum, pp , n, ee, (ctr - 1) % l, zeros[ctr-1]);
-				printf("pid %d\tsum2 %d\tpp %c\tn %c\t e %c  ctr %llu zero %f\n", x, sum2, pp2 , n2, ee2, ctr % l, zeros[ctr]);
+				pthread_t x = pthread_self();
+				printf("pid %p\tpp %c\tn %c\t e %c  ctr %llu zero %f\n", x, pp , n, ee, (ctr - 1) % l, zeros[ctr-1]);
+				printf("pid %p\tpp %c\tn %c\t e %c  ctr %llu zero %f\n", x, pp2 , n2, ee2, ctr % l, zeros[ctr]);
 				ctr++;
 				fseek(fe, START,  SEEK_SET);
 				fscanf(fp, "%c", &pp);
